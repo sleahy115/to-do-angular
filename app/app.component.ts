@@ -9,6 +9,19 @@ import { Component } from '@angular/core';
     <ul>
       <li [class]="priorityColor(currentTask)" (click)="isDone(currentTask)" *ngFor="let currentTask of tasks">{{currentTask.description}} <button (click)="editTask()">Edit this task</button></li>
     </ul>
+    <hr>
+    <div>
+    <h3>{{selectedTask.description}}</h3>
+    <p>Task complete? {{selectedTask.done}}</p>
+    <h3> Edit task </h3>
+    <label> Enter task description </label>
+    <input [(ngModel)]="selectedTask.description">
+    <label> Enter task priority (1-3) </label>
+    <br>
+    <input type="radio" [(ngModel)]="selectedTask.priority" [value]="1">1 (Low priority)<br>
+    <input type="radio" [(ngModel)]="selectedTask.priority" [value]="2">2 (Medium priority)<br>
+    <input type="radio" [(ngModel)]="selectedTask.priority" [value]="3">3 (High priority)<br>
+    </div>
   </div>
   `
 })
@@ -24,6 +37,8 @@ export class AppComponent {
     new Task('Begin brainstorming possible JavaScript group projects',3),
     new Task('Add README file to last few Angular repos on GitHub',1)
   ];
+
+  selectedTask: Task = this.tasks[0];
 
   editTask() {
     alert ("Would you like to edit this task?");
